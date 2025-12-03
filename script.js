@@ -24,7 +24,7 @@ document.getElementById("contactForm").addEventListener("submit", function(e) {
         message: this.message.value
     };
 
-    fetch("https://script.google.com/macros/s/AKfycbyVpRr7wvBsJrRNcC7ETe-MElTkyNbRGicUcIGoBZ2u/devhttps://script.google.com/macros/s/AKfycby625o2__yCx1G-CvuqfmE1Ig16tNd6-Guv9BVxOLB5zLX1U2y7rr4hMDcoGrbPYPhclw/exec", { // replace with your correct /exec URL
+    fetch("https://script.google.com/macros/s/AKfycbzP7oCTle6tyFIe5cR0v0dP__OxwIta6QSwGLaNs_Gr-E2PgXH7birn5AqHADUT8uV2pQ/exec", { 
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -33,7 +33,7 @@ document.getElementById("contactForm").addEventListener("submit", function(e) {
     })
     .then(response => response.json())
     .then(data => {
-        // Success popup
+        // Success popup 
         const popup = document.createElement("div");
         popup.innerText = "Message sent successfully!";
         popup.style.position = "fixed";
