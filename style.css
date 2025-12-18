@@ -3,13 +3,10 @@
   --color-text: #e6e6e6;
   --color-accent: #1d201e;
   --color-highlight: #ffffff;
-  --color-hover: #05446d;
   --color-border: rgba(255, 255, 255, 0.12);
-  --color-btn-bg: #f9f9f9;
-  --color-btn-hover: #05446d;
   --color-footer: #000018;
-  --color-skill-bg: #11141a;
-  --color-skill-hover: #1a1d24;
+  --color-primary: #0099ff;
+  --color-primary-light: #00d4ff;
   --radius: 12px;
   --transition: 0.3s ease;
 }
@@ -30,6 +27,7 @@ body {
   font-family: 'Poppins', sans-serif;
   overflow-x: hidden;
   line-height: 1.6;
+  font-size: 16px;
 }
 
 /* ----- NAVBAR ----- */
@@ -38,39 +36,48 @@ nav {
   top: 0;
   z-index: 999;
   width: 100%;
-  padding: 15px 20px;
+  padding: 1rem 1.25rem;
   background: rgba(10, 10, 15, 0.95);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--color-border);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 nav .left {
-  font-size: 1.5rem;
+  font-size: clamp(1.2rem, 5vw, 1.8rem);
   font-weight: 700;
   color: var(--color-highlight);
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: 'Playfair Display', serif;
+  background: linear-gradient(135deg, #0099ff, #00d4ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 nav ul {
   display: flex;
-  gap: 10px;
+  gap: 0.5rem;
   list-style: none;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 nav ul li {
-  padding: 8px 12px;
+  padding: 0.5rem 1rem;
   border-radius: var(--radius);
   cursor: pointer;
   transition: var(--transition);
-  font-size: 0.9rem;
+  font-size: clamp(0.75rem, 2vw, 1rem);
+  white-space: nowrap;
 }
 
 nav ul li:hover {
-  background: var(--color-hover);
-  color: #fff;
+  background: rgba(0, 153, 255, 0.15);
+  color: var(--color-primary-light);
+  border: 1px solid var(--color-primary);
 }
 
 nav ul li a {
