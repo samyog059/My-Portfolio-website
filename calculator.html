@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator - Samyog Pangeni</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0d0617;
+      --bg-secondary: #1a0b2e;
+      --primary: #7b1fa2;
+      --secondary: #f48fb1;
+      --text-primary: #ffffff;
+      --text-secondary: #b8b8b8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .back-btn {
+      position: fixed;
+      top: 1.5rem;
+      left: 1.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+
+    .back-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(123, 31, 162, 0.5);
+    }
+
+    .container {
+      max-width: 450px;
+      width: 100%;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      text-align: center;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+
+    .calculator {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(123, 31, 162, 0.3);
+      border-radius: 25px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .calc-display {
+      background: rgba(13, 6, 23, 0.8);
+      color: var(--text-primary);
+      font-size: clamp(2rem, 5vw, 3rem);
+      padding: 1.5rem;
+      border-radius: 15px;
+      margin-bottom: 1.5rem;
+      text-align: right;
+      font-weight: 300;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      word-break: break-all;
+      border: 1px solid rgba(123, 31, 162, 0.3);
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+    }
+
+    .calc-display::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .calc-display::-webkit-scrollbar-thumb {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 10px;
+    }
+
+    .calc-buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .calc-btn {
+      padding: 1.5rem;
+      font-size: 1.5rem;
+      border: none;
+      border-radius: 15px;
+      background: rgba(123, 31, 162, 0.2);
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      border: 1px solid rgba(123, 31, 162, 0.3);
+      font-family: 'Poppins', sans-serif;
+      min-height: 70px;
+    }
+
+    .calc-btn:hover {
+      background: rgba(123, 31, 162, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(123, 31, 162, 0.3);
+    }
+
+    .calc-btn:active {
+      transform: translateY(0) scale(0.95);
+    }
+
+    .calc-operator {
+      background: linear-gradient(135deg, rgba(123, 31, 162, 0.4), rgba(244, 143, 177, 0.4));
+      font-weight: 600;
+    }
+
+    .calc-operator:hover {
+      background: linear-gradient(135deg, rgba(123, 31, 162, 0.6), rgba(244, 143, 177, 0.6));
+    }
+
+    .calc-clear {
+      background: rgba(239, 83, 80, 0.3);
+      color: #ef5350;
+      font-weight: 700;
+    }
+
+    .calc-clear:hover {
+      background: rgba(239, 83, 80, 0.5);
+      color: white;
+    }
+
+    .calc-equals {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      font-weight: 700;
+      font-size: 2rem;
+    }
+
+    .calc-equals:hover {
+      box-shadow: 0 10px 25px rgba(123, 31, 162, 0.6);
+    }
+
+    .keyboard-hint {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .back-btn {
+        top: 1rem;
+        left: 1rem;
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+      }
+
+      .calculator {
+        padding: 1.5rem;
+        border-radius: 20px;
+      }
+
+      .calc-display {
+        font-size: 2rem;
+        padding: 1rem;
+        min-height: 70px;
+      }
+
+      .calc-buttons {
+        gap: 0.75rem;
+      }
+
+      .calc-btn {
+        padding: 1.2rem;
+        font-size: 1.3rem;
+        min-height: 60px;
+        border-radius: 12px;
+      }
+
+      .calc-equals {
+        font-size: 1.6rem;
+      }
+
+      .keyboard-hint {
+        font-size: 0.85rem;
+        padding: 0 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .calc-btn {
+        padding: 1rem;
+        font-size: 1.1rem;
+        min-height: 55px;
+      }
+
+      .calc-buttons {
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html#projects" class="back-btn">← Back to Portfolio</a>
+
+  <div class="container">
+    <h1>🔢 Calculator</h1>
+    <p class="subtitle">Perform your calculations with ease</p>
+
+    <div class="calculator">
+      <div class="calc-display" id="calcDisplay">0</div>
+      <div class="calc-buttons">
+        <button class="calc-btn calc-clear" onclick="clearCalc()">C</button>
+        <button class="calc-btn calc-operator" onclick="appendCalc('/')">/</button>
+        <button class="calc-btn calc-operator" onclick="appendCalc('*')">×</button>
+        <button class="calc-btn calc-operator" onclick="deleteCalc()">⌫</button>
+        
+        <button class="calc-btn" onclick="appendCalc('7')">7</button>
+        <button class="calc-btn" onclick="appendCalc('8')">8</button>
+        <button class="calc-btn" onclick="appendCalc('9')">9</button>
+        <button class="calc-btn calc-operator" onclick="appendCalc('-')">−</button>
+        
+        <button class="calc-btn" onclick="appendCalc('4')">4</button>
+        <button class="calc-btn" onclick="appendCalc('5')">5</button>
+        <button class="calc-btn" onclick="appendCalc('6')">6</button>
+        <button class="calc-btn calc-operator" onclick="appendCalc('+')">+</button>
+        
+        <button class="calc-btn" onclick="appendCalc('1')">1</button>
+        <button class="calc-btn" onclick="appendCalc('2')">2</button>
+        <button class="calc-btn" onclick="appendCalc('3')">3</button>
+        <button class="calc-btn calc-equals" onclick="calculateCalc()" style="grid-row: span 2">=</button>
+        
+        <button class="calc-btn" onclick="appendCalc('0')" style="grid-column: span 2">0</button>
+        <button class="calc-btn" onclick="appendCalc('.')">.</button>
+      </div>
+    </div>
+
+    <p class="keyboard-hint">💡 Tip: You can use your keyboard! (Numbers, operators, Enter, Escape, Backspace)</p>
+  </div>
+
+  <script>
+    let calcDisplay = '';
+
+    function updateCalcDisplay() {
+      const display = document.getElementById('calcDisplay');
+      display.textContent = calcDisplay || '0';
+    }
+
+    function appendCalc(value) {
+      if (calcDisplay === '0' && value !== '.') {
+        calcDisplay = value;
+      } else if (calcDisplay === 'Error') {
+        calcDisplay = value;
+      } else {
+        calcDisplay += value;
+      }
+      updateCalcDisplay();
+    }
+
+    function clearCalc() {
+      calcDisplay = '';
+      updateCalcDisplay();
+    }
+
+    function deleteCalc() {
+      calcDisplay = calcDisplay.slice(0, -1);
+      updateCalcDisplay();
+    }
+
+    function calculateCalc() {
+      try {
+        const expression = calcDisplay.replace(/×/g, '*').replace(/−/g, '-');
+        const result = eval(expression);
+        
+        if (!isFinite(result)) {
+          calcDisplay = 'Error';
+        } else {
+          calcDisplay = String(Math.round(result * 100000000) / 100000000);
+        }
+      } catch (error) {
+        calcDisplay = 'Error';
+      }
+      updateCalcDisplay();
+    }
+
+    // Keyboard support
+    document.addEventListener('keydown', function(e) {
+      if (e.key >= '0' && e.key <= '9') {
+        appendCalc(e.key);
+      } else if (e.key === '.') {
+        appendCalc('.');
+      } else if (e.key === '+') {
+        appendCalc('+');
+      } else if (e.key === '-') {
+        appendCalc('-');
+      } else if (e.key === '*') {
+        appendCalc('*');
+      } else if (e.key === '/') {
+        e.preventDefault();
+        appendCalc('/');
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        calculateCalc();
+      } else if (e.key === 'Escape') {
+        clearCalc();
+      } else if (e.key === 'Backspace') {
+        e.preventDefault();
+        deleteCalc();
+      }
+    });
+
+    updateCalcDisplay();
+  </script>
+</body>
+</html>

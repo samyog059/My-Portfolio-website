@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List App - Samyog Pangeni</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0d0617;
+      --bg-secondary: #1a0b2e;
+      --primary: #7b1fa2;
+      --secondary: #f48fb1;
+      --text-primary: #ffffff;
+      --text-secondary: #b8b8b8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+
+    .back-btn {
+      position: fixed;
+      top: 1.5rem;
+      left: 1.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+
+    .back-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(123, 31, 162, 0.5);
+    }
+
+    .container {
+      max-width: 600px;
+      width: 100%;
+      margin-top: 4rem;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      text-align: center;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+      font-size: 1.1rem;
+    }
+
+    .todo-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(123, 31, 162, 0.3);
+      border-radius: 20px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .todo-input-box {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    #todoInput {
+      flex: 1;
+      padding: 1rem 1.5rem;
+      border: 2px solid rgba(123, 31, 162, 0.3);
+      border-radius: 12px;
+      background: rgba(13, 6, 23, 0.5);
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    #todoInput:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 15px rgba(123, 31, 162, 0.4);
+    }
+
+    #todoInput::placeholder {
+      color: var(--text-secondary);
+    }
+
+    #addTodoBtn {
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    #addTodoBtn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(123, 31, 162, 0.5);
+    }
+
+    .todo-stats {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      padding: 0.75rem;
+      background: rgba(123, 31, 162, 0.1);
+      border-radius: 10px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .todo-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-height: 500px;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+    }
+
+    .todo-list::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .todo-list::-webkit-scrollbar-track {
+      background: rgba(13, 6, 23, 0.3);
+      border-radius: 10px;
+    }
+
+    .todo-list::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 10px;
+    }
+
+    .todo-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: rgba(13, 6, 23, 0.4);
+      border: 1px solid rgba(123, 31, 162, 0.2);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .todo-item:hover {
+      border-color: rgba(123, 31, 162, 0.5);
+      background: rgba(13, 6, 23, 0.6);
+      transform: translateX(5px);
+    }
+
+    .todo-item.completed {
+      opacity: 0.6;
+    }
+
+    .todo-item.completed .todo-text {
+      text-decoration: line-through;
+      color: var(--text-secondary);
+    }
+
+    .todo-checkbox {
+      min-width: 24px;
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--primary);
+      border-radius: 6px;
+      cursor: pointer;
+      appearance: none;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .todo-checkbox:checked {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-color: var(--secondary);
+    }
+
+    .todo-checkbox:checked::after {
+      content: '✓';
+      position: absolute;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .todo-text {
+      flex: 1;
+      color: var(--text-primary);
+      font-size: 1rem;
+      word-break: break-word;
+      line-height: 1.5;
+    }
+
+    .todo-delete {
+      background: rgba(239, 83, 80, 0.2);
+      color: #ef5350;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .todo-delete:hover {
+      background: #ef5350;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--text-secondary);
+    }
+
+    .empty-state-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    @media (max-width: 768px) {
+      .back-btn {
+        top: 1rem;
+        left: 1rem;
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+      }
+
+      .container {
+        margin-top: 3rem;
+      }
+
+      .todo-box {
+        padding: 1.5rem;
+      }
+
+      .todo-input-box {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      #addTodoBtn {
+        width: 100%;
+      }
+
+      .todo-item {
+        padding: 0.75rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html#projects" class="back-btn">← Back to Portfolio</a>
+
+  <div class="container">
+    <h1>📝 Todo List</h1>
+    <p class="subtitle">Keep track of your tasks efficiently</p>
+
+    <div class="todo-box">
+      <div class="todo-input-box">
+        <input type="text" id="todoInput" placeholder="What do you need to do?" />
+        <button id="addTodoBtn">Add Task</button>
+      </div>
+
+      <div class="todo-stats">
+        <span id="totalTasks">Total: 0</span>
+        <span id="completedTasks">Completed: 0</span>
+        <span id="pendingTasks">Pending: 0</span>
+      </div>
+
+      <ul id="todoList" class="todo-list">
+        <div class="empty-state">
+          <div class="empty-state-icon">📋</div>
+          <p>No tasks yet. Add one to get started!</p>
+        </div>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    let todos = JSON.parse(localStorage.getItem('todos')) || [];
+
+    function updateStats() {
+      const total = todos.length;
+      const completed = todos.filter(t => t.completed).length;
+      const pending = total - completed;
+
+      document.getElementById('totalTasks').textContent = `Total: ${total}`;
+      document.getElementById('completedTasks').textContent = `Completed: ${completed}`;
+      document.getElementById('pendingTasks').textContent = `Pending: ${pending}`;
+    }
+
+    function renderTodos() {
+      const todoList = document.getElementById('todoList');
+      
+      if (todos.length === 0) {
+        todoList.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">📋</div>
+            <p>No tasks yet. Add one to get started!</p>
+          </div>
+        `;
+        updateStats();
+        return;
+      }
+
+      todoList.innerHTML = '';
+      
+      todos.forEach((todo, index) => {
+        const li = document.createElement('li');
+        li.className = `todo-item ${todo.completed ? 'completed' : ''}`;
+        
+        li.innerHTML = `
+          <input type="checkbox" class="todo-checkbox" ${todo.completed ? 'checked' : ''} 
+                 onchange="toggleTodo(${index})">
+          <span class="todo-text">${todo.text}</span>
+          <button class="todo-delete" onclick="deleteTodo(${index})">Delete</button>
+        `;
+        
+        todoList.appendChild(li);
+      });
+
+      updateStats();
+    }
+
+    function addTodo() {
+      const input = document.getElementById('todoInput');
+      const text = input.value.trim();
+      
+      if (text) {
+        todos.push({ text, completed: false, createdAt: new Date().toISOString() });
+        input.value = '';
+        saveTodos();
+        renderTodos();
+      }
+    }
+
+    function toggleTodo(index) {
+      todos[index].completed = !todos[index].completed;
+      saveTodos();
+      renderTodos();
+    }
+
+    function deleteTodo(index) {
+      todos.splice(index, 1);
+      saveTodos();
+      renderTodos();
+    }
+
+    function saveTodos() {
+      localStorage.setItem('todos', JSON.stringify(todos));
+    }
+
+    document.getElementById('addTodoBtn').addEventListener('click', addTodo);
+    document.getElementById('todoInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        addTodo();
+      }
+    });
+
+    renderTodos();
+  </script>
+</body>
+</html>

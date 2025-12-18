@@ -71,3 +71,4 @@ function showPopup(message, bgColor) {
         setTimeout(() => popup.remove(), 500);
     }, 2500);
 }
+
