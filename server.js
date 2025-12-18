@@ -14,16 +14,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // MongoDB Connection
 const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/portfolio';
 
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+console.log('Attempting to connect to MongoDB...');
+console.log('MongoDB URI exists:', !!process.env.MONGODB_URI);
+
+mongoose.connect(mongoURI)
 .then(() => {
   console.log('✓ MongoDB connected successfully');
 })
 .catch(err => {
-  console.error('✗ MongoDB connection error:', err);
-  process.exit(1);
+  console.error('✗ MongoDB connection error:', err.message);
+  console.error('Please check MONGODB_URI environment variable');
 });
 
 // Message Schema
