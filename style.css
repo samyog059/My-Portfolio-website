@@ -748,7 +748,7 @@ footer {
   .skill-item:hover {
     transform: translateY(-10px);
   }
-}
+
 
 /* Ultra-wide Devices (1440px and above) */
 @media (min-width: 1440px) {

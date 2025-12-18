@@ -79,7 +79,7 @@ If hosted on:
 Add to server.js line 12:
 ```javascript
 app.use(cors({
-  origin: 'https://yourdomain.com'
+  origin: 'https://samyogpangeni.com.np'
 }));
 ```
 
