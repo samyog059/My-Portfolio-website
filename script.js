@@ -17,19 +17,32 @@ window.addEventListener('load', revealElements);
 document.getElementById("contactForm").addEventListener("submit", function(e) {
     e.preventDefault();
 
-    const formData = new FormData(this);  // IMPORTANT: No JSON
+    const formData = {
+        name: document.querySelector('input[name="name"]').value,
+        email: document.querySelector('input[name="email"]').value,
+        subject: document.querySelector('input[name="subject"]').value,
+        message: document.querySelector('textarea[name="message"]').value,
+    };
 
-    fetch("https://script.google.com/macros/s/AKfycbzP7oCTle6tyFIe5cR0v0dP__OxwIta6QSwGLaNs_Gr-E2PgXH7birn5AqHADUT8uV2pQ/exec", {
+    // Send to Node.js backend
+    fetch("http://localhost:5000/api/contact", {
         method: "POST",
-        body: formData
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
     })
-    .then(response => response.text())
-    .then(() => {
-        showPopup("Message sent successfully!", "#4BB543");
-        this.reset();
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showPopup("✓ Message sent successfully!", "#4BB543");
+            document.getElementById("contactForm").reset();
+        } else {
+            showPopup("✗ " + data.message, "#FF4C4C");
+        }
     })
     .catch(error => {
-        console.error(error);
+        console.error('Error:', error);
         showPopup("Error sending message!", "#FF4C4C");
     });
 });
