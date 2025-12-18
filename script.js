@@ -24,8 +24,8 @@ document.getElementById("contactForm").addEventListener("submit", function(e) {
         message: document.querySelector('textarea[name="message"]').value,
     };
 
-    // Send to live backend - UPDATE WITH YOUR RENDER URL
-    const backendURL = "https://portfolio-backend-xxxx.onrender.com/api/contact";
+    // Send to live backend
+    const backendURL = "https://my-portfolio-website-wbz1.onrender.com/api/contact";
     
     fetch(backendURL, {
         method: "POST",
