@@ -3,29 +3,37 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 
 const app = express();
-app.use(cors());
+
+// Middleware
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
+// MongoDB Connection
 mongoose.connect("mongodb+srv://samyog:Smgbeast@cluster0.xaxsqbe.mongodb.net/?appName=Cluster0")
-.then(() => console.log("MongoDB connected"))
-.catch(err => console.log(err));
+  .then(() => console.log("MongoDB connected"))
+  .catch(err => console.log(err));
 
-app.listen(5000, () => console.log("Server running on port 5000"));
+// Schema
 const ContactSchema = new mongoose.Schema({
   name: String,
   email: String,
-  message: String
-});
+  subject: String,
+  message: String,
+}, { timestamps: true });
 
 const Contact = mongoose.model("Contact", ContactSchema);
 
-app.post("/contact", async (req, res) => {
+// Route (MATCHES FRONTEND)
+app.post("/api/contact", async (req, res) => {
   try {
     const contact = new Contact(req.body);
     await contact.save();
-    res.json({ success: true, message: "Message saved" });
+    res.json({ success: true, message: "Message saved successfully" });
   } catch (error) {
-    res.status(500).json({ success: false });
+    res.status(500).json({ success: false, message: "Server error" });
   }
 });
 
+// Port
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
