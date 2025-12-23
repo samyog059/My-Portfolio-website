@@ -69,15 +69,61 @@ nav {
 }
 
 nav .left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   font-size: clamp(1.25rem, 4vw, 1.9rem);
   font-weight: 700;
   color: var(--color-highlight);
   font-family: 'Playfair Display', 'Space Grotesk', serif;
   letter-spacing: 0.08em;
-  background: linear-gradient(120deg, var(--color-primary), var(--color-amber));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+}
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--color-primary-strong), var(--color-amber));
+  color: #03040a;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  box-shadow: 0 10px 30px rgba(14, 165, 233, 0.35);
+}
+
+.brand-label {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.brand-name {
+  font-size: clamp(1rem, 3vw, 1.15rem);
+  letter-spacing: 0.18em;
+  position: relative;
+  display: inline-block;
+  color: var(--color-highlight);
+}
+
+.brand-name::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(120deg, var(--color-amber), var(--color-primary-strong));
+  border-radius: 999px;
+  opacity: 0.9;
+  box-shadow: 0 6px 18px rgba(14, 165, 233, 0.4);
+}
+
+.brand-role {
+  font-size: clamp(0.7rem, 2.4vw, 0.82rem);
+  letter-spacing: 0.32em;
+  color: var(--color-text-muted);
 }
 
 nav ul {
