@@ -114,24 +114,12 @@ nav .left {
   color: var(--color-highlight);
 }
 
-.brand-name::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(120deg, var(--color-primary), var(--color-primary-strong));
-  border-radius: 999px;
-  opacity: 0.9;
-  box-shadow: 0 6px 18px rgba(10, 255, 157, 0.4);
-}
-
 .brand-role {
   font-size: clamp(0.7rem, 2.4vw, 0.82rem);
   letter-spacing: 0.32em;
   color: rgba(201, 255, 232, 0.8);
   font-family: 'JetBrains Mono', 'Space Grotesk', monospace;
+  margin-top: 6px;
 }
 
 nav ul {
@@ -511,6 +499,9 @@ footer {
 @media (max-width: 480px) {
   nav {
     padding: 0.75rem 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
   }
 
   nav .left {
@@ -518,12 +509,14 @@ footer {
   }
 
   nav ul {
-    gap: 0.25rem;
+    width: 100%;
+    gap: 0.4rem 0.6rem;
+    justify-content: space-between;
   }
 
   nav ul li {
-    padding: 0.4rem 0.75rem;
-    font-size: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
   }
 
   .section {
@@ -579,6 +572,9 @@ footer {
 @media (min-width: 481px) and (max-width: 767px) {
   nav {
     padding: 1rem 1.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
   }
 
   nav .left {
@@ -586,7 +582,10 @@ footer {
   }
 
   nav ul {
-    gap: 0.5rem;
+    width: 100%;
+    gap: 0.5rem 0.75rem;
+    justify-content: flex-start;
+    flex-wrap: wrap;
   }
 
   .section {
@@ -761,7 +760,7 @@ footer {
 }
 
 .preview-icon {
-  font-size: 2rem;
+  font-size: 1.6rem;
   min-width: 50px;
   height: 50px;
   display: flex;
@@ -771,6 +770,8 @@ footer {
   border-radius: 10px;
   color: white;
   font-weight: bold;
+  font-family: 'JetBrains Mono', 'Space Grotesk', monospace;
+  line-height: 1;
 }
 
 .project-preview p {
