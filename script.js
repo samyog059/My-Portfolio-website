@@ -24,7 +24,8 @@ document.getElementById("contactForm").addEventListener("submit", async function
     message: document.querySelector('textarea[name="message"]').value,
   };
 
-  const backendURL = "https://my-portfolio-website-wbz1.onrender.com/api/contact";
+  // Change to your deployed API URL when hosting the backend
+  const backendURL = "http://localhost:5000/api/contact";
 
   try {
     const response = await fetch(backendURL, {
