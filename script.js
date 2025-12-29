@@ -13,39 +13,11 @@ function revealElements() {
 window.addEventListener('scroll', revealElements);
 window.addEventListener('load', revealElements);
 
-// Contact Form
-document.getElementById("contactForm").addEventListener("submit", async function (e) {
-  e.preventDefault();
+// Contact Form (HTML-only)
+const form = document.getElementById("contactForm");
 
-  const formData = {
-    name: document.querySelector('input[name="name"]').value,
-    email: document.querySelector('input[name="email"]').value,
-    subject: document.querySelector('input[name="subject"]').value,
-    message: document.querySelector('textarea[name="message"]').value,
-  };
-
-  // Change to your deployed API URL when hosting the backend
-  const backendURL = "http://localhost:5000/api/contact";
-
-  try {
-    const response = await fetch(backendURL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
-      showPopup("✓ Message sent successfully!", "#4BB543");
-      document.getElementById("contactForm").reset();
-    } else {
-      showPopup("✗ " + data.message, "#FF4C4C");
-    }
-  } catch (error) {
-    console.error(error);
-    showPopup("Server error!", "#FF4C4C");
-  }
+form.addEventListener("submit", function () {
+  showPopup("✓ Sending message...", "#3498db");
 });
 
 // Popup
@@ -64,5 +36,5 @@ function showPopup(message, bgColor) {
 
   document.body.appendChild(popup);
 
-  setTimeout(() => popup.remove(), 2500);
+  setTimeout(() => popup.remove(), 2000);
 }
