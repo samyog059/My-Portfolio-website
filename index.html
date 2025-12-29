@@ -128,13 +128,25 @@
 
     <h3>Send Me a Message</h3>
 
-    <form id="contactForm" class="contact-form">
+   <form
+  id="contactForm"
+  class="contact-form"
+  action="https://formsubmit.co/pangenisamyog33@gmail.com"
+  method="POST"
+>
   <input type="text" name="name" required placeholder="Your Name">
   <input type="email" name="email" required placeholder="Your Email">
   <input type="text" name="subject" required placeholder="Subject">
   <textarea name="message" rows="5" required placeholder="Message"></textarea>
+
+  <!-- hidden settings -->
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="_subject" value="New Portfolio Message">
+
   <button type="submit" class="btn">Send Message</button>
 </form>
+
 
   </section>
 
