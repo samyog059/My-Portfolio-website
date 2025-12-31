@@ -40,6 +40,24 @@ body {
   position: relative;
 }
 
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 12px;
+  background: var(--color-primary);
+  color: #02140f;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  z-index: 15;
+}
+
+.skip-link:focus {
+  left: 12px;
+  box-shadow: var(--shadow-soft);
+}
+
 body::before,
 body::after {
   content: "";

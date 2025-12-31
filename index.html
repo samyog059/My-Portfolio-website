@@ -3,15 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Samyog Portfolio</title>
+  <title>Samyog Pangeni | IT Student & Developer Portfolio</title>
+  <meta name="description" content="Portfolio of Samyog Pangeni, an IT student passionate about web development, problem solving, and modern technologies. Explore projects, skills, and contact details." />
+  <meta name="author" content="Samyog Pangeni" />
+  <link rel="canonical" href="https://samyogpangeni.com.np/" />
+  <meta property="og:title" content="Samyog Pangeni | IT Student & Developer Portfolio" />
+  <meta property="og:description" content="See Samyog Pangeni's projects, skills, and contact information. Based in Waling, Nepal." />
+  <meta property="og:url" content="https://samyogpangeni.com.np/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://samyogpangeni.com.np/profile.jpeg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Samyog Pangeni | IT Student & Developer" />
+  <meta name="twitter:description" content="Projects, skills, and contact details of Samyog Pangeni from Waling, Nepal." />
+  <meta name="theme-color" content="#00a462" />
+  <link rel="icon" href="profile.jpeg" type="image/jpeg" />
+  <link rel="preload" as="image" href="profile.jpeg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Samyog Pangeni",
+      "jobTitle": "IT Student",
+      "url": "https://samyogpangeni.com.np/",
+      "image": "https://samyogpangeni.com.np/profile.jpeg",
+      "email": "mailto:samyogpangeni4@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Waling",
+        "addressRegion": "Gandaki",
+        "addressCountry": "Nepal"
+      },
+      "sameAs": [
+        "mailto:samyogpangeni4@gmail.com"
+      ],
+      "knowsAbout": ["Web Development", "JavaScript", "Frontend", "Backend", "Databases", "Problem Solving"]
+    }
+  </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to main content</a>
 
-  <nav>
+  <nav aria-label="Primary">
     <div class="left">
       <span class="brand-mark">SP</span>
       <div class="brand-label">
@@ -28,34 +64,34 @@
     </ul>
   </nav>
 
-  <section id="home" class="section hero reveal">
+  <main id="main">
+  <section id="home" class="section hero reveal" aria-labelledby="home-heading">
     <div class="hero-text">
-      <h1>Hello, I'm Samyog Pangeni</h1>
-      <p>A passionate IT Student with a dream of achieving higher skills in Computer and latest technologies.
+      <h1 id="home-heading">Hello, I'm Samyog Pangeni</h1>
+      <p>A passionate IT student from Waling, Nepal, focused on modern web development, problem solving, and learning the latest technologies.
       </p>
       <a href="#contact" class="btn">Contact Me</a>
     </div>
     <div class="hero-image">
-      <img src="profile.jpeg" alt="Samyog Photo">
+      <img src="profile.jpeg" alt="Portrait of Samyog Pangeni" loading="lazy">
     </div>
   </section>
 
-  <section id="about" class="section about reveal">
-    <h2 class="section-title">About Me</h2>
+  <section id="about" class="section about reveal" aria-labelledby="about-heading">
+    <h2 id="about-heading" class="section-title">About Me</h2>
     <p>
       Hi, I'm Samyog Pangeni from Waling, Nepal. I'm currently studying BICTE at Waling Multiple Campus.
       I'm passionate about religion, physical exercise, and productivity, and I strive to grow every day—both personally and professionally.
     </p>
   </section>
 
-  <section id="skills" class="section skills reveal">
-    <h2 class="section-title">Skills</h2>
+  <section id="skills" class="section skills reveal" aria-labelledby="skills-heading">
+    <h2 id="skills-heading" class="section-title">Skills</h2>
     <ul>
       <li>Computer Intermediary</li>
       <li>Basic Programming</li>
       <li>Frontend and Backend with Database</li>
       <li>Communication</li>
-      <li>Problem Solving</li>
       <li>Time Management</li>
       <li>Teamwork</li>
       <li>Problem Solving</li>
@@ -65,8 +101,8 @@
     <a href="Resume.pdf" class="btn" download>Download CV</a>
   </section>
 
-  <section id="projects" class="section projects reveal">
-    <h2 class="section-title">My Projects</h2>
+  <section id="projects" class="section projects reveal" aria-labelledby="projects-heading">
+    <h2 id="projects-heading" class="section-title">My Projects</h2>
     <div class="projects-grid">
       
       <!-- Todo List Project -->
@@ -120,11 +156,22 @@
   </section>
 
 
-  <section id="contact" class="section contact reveal">
-    <h2 class="section-title">Contact</h2>
+  <section id="contact" class="section contact reveal" aria-labelledby="contact-heading">
+    <h2 id="contact-heading" class="section-title">Contact</h2>
     <p>Email: <a href="mailto:samyogpangeni4@gmail.com">samyogpangeni4@gmail.com</a></p>
     <p>Location: Waling-09, Syangja, Nepal</p>
-    <p>Contact No: +9779848262365</p>
+    <p>Contact No: <a href="tel:+9779848262365">+9779848262365</a></p>
+
+    <div class="social-links" aria-label="Social links">
+      <h3>Find me online</h3>
+      <ul>
+        <li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok</a></li>
+        <li><a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a></li>
+      </ul>
+    </div>
 
     <h3>Send Me a Message</h3>
 
@@ -149,6 +196,8 @@
 
 
   </section>
+
+  </main>
 
   <footer>
     <p style="color: aliceblue;">&copy; 2025 Samyog Pangeni. All rights reserved.</p>
