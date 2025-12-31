@@ -171,15 +171,60 @@ nav ul li a {
   color: inherit;
 }
 
+@media (max-width: 900px) {
+  nav {
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+  }
+
+  nav .nav-links {
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+    padding: 0.5rem 0;
+    animation: fadeInUp 0.35s ease;
+  }
+
+  nav.nav-open .nav-links {
+    display: flex;
+  }
+
+  nav ul li {
+    width: 100%;
+    padding: 0.65rem 0.9rem;
+  }
+
+  nav ul li a {
+    width: 100%;
+    display: block;
+  }
+}
+
 /* Mobile Menu Toggle */
 .menu-toggle {
   display: none;
   background: none;
   border: none;
-  color: var(--color-highlight);
-  font-size: 1.5rem;
+  color: var(--color-primary);
+  font-size: 1.75rem;
   cursor: pointer;
-  padding: 5px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  transition: var(--transition);
+}
+
+.menu-toggle:hover {
+  background: rgba(37, 99, 235, 0.12);
+  box-shadow: var(--shadow-soft);
 }
 
 /* ----- SECTIONS ----- */
