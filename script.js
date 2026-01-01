@@ -16,9 +16,11 @@ window.addEventListener('load', revealElements);
 // Contact Form (HTML-only)
 const form = document.getElementById("contactForm");
 
-form.addEventListener("submit", function () {
-  showPopup("✓ Sending message...", "#3498db");
-});
+if (form) {
+  form.addEventListener("submit", function () {
+    showPopup("✓ Sending message...", "#3498db");
+  });
+}
 
 // Mobile nav toggle
 const nav = document.querySelector('nav');
@@ -40,6 +42,33 @@ if (menuToggle && nav) {
     });
   });
 }
+
+// Copy-to-clipboard for share buttons
+const copyLinks = document.querySelectorAll('[data-copy-link]');
+
+copyLinks.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const url = btn.getAttribute('data-copy-link');
+
+    if (navigator.clipboard && url) {
+      navigator.clipboard.writeText(url)
+        .then(() => showPopup('Link copied', '#16a34a'))
+        .catch(() => showPopup('Copy failed', '#ef4444'));
+    } else if (url) {
+      const helper = document.createElement('textarea');
+      helper.value = url;
+      document.body.appendChild(helper);
+      helper.select();
+      try {
+        document.execCommand('copy');
+        showPopup('Link copied', '#16a34a');
+      } catch (e) {
+        showPopup('Copy failed', '#ef4444');
+      }
+      document.body.removeChild(helper);
+    }
+  });
+});
 
 // Popup
 function showPopup(message, bgColor) {
