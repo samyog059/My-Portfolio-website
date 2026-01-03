@@ -13,6 +13,30 @@ function revealElements() {
 window.addEventListener('scroll', revealElements);
 window.addEventListener('load', revealElements);
 
+// Typewriter effect for hero heading
+const typeTarget = document.querySelector('[data-type-text]');
+
+if (typeTarget) {
+  const fullText = typeTarget.getAttribute('data-type-text')?.trim() || typeTarget.textContent.trim();
+  const typingDelay = 80;
+  let index = 0;
+
+  typeTarget.textContent = '';
+
+  const typeNext = () => {
+    typeTarget.textContent = fullText.slice(0, index);
+    index += 1;
+
+    if (index <= fullText.length) {
+      setTimeout(typeNext, typingDelay);
+    } else {
+      typeTarget.classList.add('typed');
+    }
+  };
+
+  setTimeout(typeNext, 400);
+}
+
 // Contact Form (HTML-only)
 const form = document.getElementById("contactForm");
 
