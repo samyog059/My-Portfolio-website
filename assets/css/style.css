@@ -290,6 +290,28 @@ nav ul li a {
   letter-spacing: -0.01em;
 }
 
+.typewriter {
+  position: relative;
+  display: inline-block;
+  padding-right: 10px;
+}
+
+.typewriter::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 2px;
+  height: 1.1em;
+  background: var(--color-highlight);
+  transform: translateY(-50%);
+  animation: caretBlink 0.9s steps(1) infinite;
+}
+
+.typewriter.typed::after {
+  animation-duration: 1.2s;
+}
+
 .hero-text p {
   font-size: 1.05rem;
   opacity: 0.9;
@@ -592,6 +614,11 @@ footer {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes caretBlink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
 }
 
 @keyframes bounce {
