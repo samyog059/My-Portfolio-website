@@ -734,7 +734,9 @@ nav ul li a {
 }
 
 .social-links a {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   padding: 10px 16px;
   border-radius: var(--radius);
   border: 1px solid var(--color-border);
@@ -743,6 +745,13 @@ nav ul li a {
   transition: var(--transition);
   text-decoration: none;
   font-weight: 600;
+}
+
+.social-links svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  flex-shrink: 0;
 }
 
 .social-links a:hover {
